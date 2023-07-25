@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  ppu-web:
+    container_name: ppu-web
+    image: odoo:16.0
+    restart: unless-stopped
+    depends_on:
+      - ppu-db
+    ports:
+      - "8040:8040"
+    volumes:
+      - ./debian/odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./config:/etc/odoo
+      - ./custom_addons:/mnt/extra-addons
+    command: sh -c "pip install graphql-server && pip install graphene && pip install odoorpc && pip install wkhtmltopdf && exec odoo && tail -f /dev/null"
+
+  ppu-db:
+    container_name: ppu-db
+    image: postgres:15
+    restart: unless-stopped
+    ports:
+      - "5440:5432"
+    expose:
+      - 5440:5440
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-ppu-db-data:/var/lib/postgresql/data/pgdata
+
+volumes:
+  odoo-ppu-db-data:
