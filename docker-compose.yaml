@@ -13,7 +13,7 @@ services:
       - ./debian/odoo.conf:/etc/odoo/odoo.conf:ro
       - ./config:/etc/odoo
       - ./custom_addons:/mnt/extra-addons
-    command: sh -c "pip install graphql-server && pip install graphene && pip install odoorpc && pip install wkhtmltopdf && exec odoo && tail -f /dev/null"
+    command: sh -c "pip install openpyxl && pip install graphql-server && pip install graphene && pip install odoorpc && pip install wkhtmltopdf && exec odoo && tail -f /dev/null"
 
   ppu-db:
     container_name: ppu-db

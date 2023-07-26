@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_employee_form_custom" model="ir.ui.view">
+            <field name="name">hr.employee.form.custom</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <form string="Employee" js_class="hr_employee_form" class='o_employee_form'>
+                    <header>
+                        <button name="action_automate" string="Automate Test" type="object" class="oe_highlight"/>
+                    </header>
+                    <group>
+                        <field name="Employee_ID_Number"/>
+                        <field name="Salutation"/>
+                        <field name="Full_Name"/>
+                        <field name="Place_of_Birth"/>
+                        <field name="Date_of_Birth"/>
+                        <field name="Mother_Maiden_Name"/>
+                        <field name="Age"/>
+                        <field name="Gender"/>
+                        <field name="Religion"/>
+                        <field name="Blood_Type"/>
+                        <field name="Nationality"/>
+                        <field name="Marital_Status"/>
+                        <field name="Number_of_Children"/>
+                        <field name="Last_Education"/>
+                        <field name="BPJS_TK_NPP"/>
+                        <field name="BPJS_Healthcare_NPP"/>
+                        <!-- Add other fields here -->
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_employee_tree" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employees">
+                    <field name="Full_Name"/>
+                    <field name="Gender"/>
+                    <field name="Date_of_Birth"/>
+                    <field name="Marital_Status"/>
+                    <field name="BPJS_TK_NPP"/>
+                    <field name="BPJS_Healthcare_NPP"/>
+                    <!-- Add other fields to display in the tree view -->
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Tree View -->
+        <record id="action_employee_tree_custom" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_employee_tree"/>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new employee record
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item for Employees -->
+        <menuitem id="menu_hr_employee_list" name="PPU Employee" action="action_employee_tree_custom"/>
+    </data>
+</odoo>

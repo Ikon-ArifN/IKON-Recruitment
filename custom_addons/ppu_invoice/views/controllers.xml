@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <!-- Action Automate -->
+        <record id="action_automate_ppu_invoice" model="ir.actions.server">
+            <field name="name">Automate PPU Invoice</field>
+            <field name="state">code</field>
+            <field name="code">model.ppu_invoice_invoice().action_automate()</field>
+        </record>
+    </data>
+</odoo>
