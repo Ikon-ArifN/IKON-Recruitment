@@ -1,70 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <data>
-        <!-- Form View -->
-        <record id="view_employee_form_custom" model="ir.ui.view">
-            <field name="name">hr.employee.form.custom</field>
+
+        <record id="ppu_employee_inherit_view_form" model="ir.ui.view">
+            <field name="name">ppu.employee.form.inherit</field>
             <field name="model">hr.employee</field>
-            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="arch" type="xml">
-                <form string="Employee" js_class="hr_employee_form" class='o_employee_form'>
-                    <header>
-                        <button name="action_automate" string="Automate Test" type="object" class="oe_highlight"/>
-                    </header>
-                    <group>
-                        <field name="Employee_ID_Number"/>
-                        <field name="Salutation"/>
-                        <field name="Full_Name"/>
-                        <field name="Place_of_Birth"/>
-                        <field name="Date_of_Birth"/>
-                        <field name="Mother_Maiden_Name"/>
-                        <field name="Age"/>
-                        <field name="Gender"/>
-                        <field name="Religion"/>
-                        <field name="Blood_Type"/>
-                        <field name="Nationality"/>
-                        <field name="Marital_Status"/>
-                        <field name="Number_of_Children"/>
-                        <field name="Last_Education"/>
-                        <field name="BPJS_TK_NPP"/>
-                        <field name="BPJS_Healthcare_NPP"/>
-                        <!-- Add other fields here -->
-                    </group>
-                </form>
+
+                <xpath expr="//page[@name='personal_information']" position="replace">
+                    <page name="personal_information" string="Private Information" groups="hr.group_hr_user">
+                        <group >
+                            <group string="Personal Info" name="personal_info">
+                                <field name="employee_id_number" />
+                                <field name="salutation" />
+                                <field name="name" string="Full Name" readonly="True" />
+                                <field name="place_of_birth" />
+                                <field name="birthday" />
+                                <field name="mother_maiden_name" />
+                                <field name="gender" />
+                                <field name="religion" />
+                                <field name="blood_type" />
+                                <field name="country_id" options='{"no_open": True, "no_create": True}' />
+                                <field name="marital" />
+                                <field name="children" />
+                                <field name="certificate" string="Last Education" />
+                                <field name="study_field" string="major" />
+                                <field name="bpjs_tk_npp" />
+                                <field name="bpjs_healthcare_npp" />
+                            </group>
+                            <group name="id_information" string="ID Information">
+                                <field name="id_information_id_type" />
+                                <field name="id_information_id_number" />
+                            </group>
+                            <group name="tax_info" string="Tax Info">
+                                <field name="tax_id_number" />
+                                <field name="tax_effective_date" />
+                                <field name="tax_revoke_date" />
+                                <field name="tax_status_status" />
+                                <field name="employee_tax_policy" />
+                                <field name="previous_net_income" />
+                                <field name="previous_tax_paid" />
+                            </group>
+                            <group name="payslip_info" string="Payslip Info">
+                                <field name="payslip_distribution" />
+                                <field name="user_name" />
+                                <field name="password" password="True" />
+                            </group>
+                            <group name="email_and_phone_info" string="Email and Phone Info">
+                                <field name="residential_phone_number" />
+                                <field name="office_phone_number" />
+                                <field name="mobile_phone_number" />
+                                <field name="corporate_email_address" />
+                                <field name="personal_email_address" />
+                            </group>
+                            <group name="appointment_info" string="Appointment Info">
+                                <field name="date_of_hire" readonly="True" string="Date of Hire" />
+                                <field name="join_date" readonly="True" string="Join Date" />
+                                <field name="status_information_employment_status" readonly="True"
+                                    string='Status Information Employment Status' />
+                                <field name="status_information_employee_status"
+                                    string='Status Information Employee Status' />
+                                <field name="end_date_of_probation" string="End Date of Probation" />
+                                <field name="address_id"
+                                    context="{'show_address': 1}"
+                                    options='{"always_reload": True, "highlight_first_line": True}' />
+                                <field name="work_location_id"
+                                    context="{'default_address_id': address_id}" />
+                                <field name="contract_id" string="Contract No" readonly="True" />
+                                <field name="contract_start_date" string="Contract Start Date"
+                                    readonly="True" />
+                                <field name="contract_end_date" string="Contract End Date"
+                                    readonly="True" />
+                                <field name="working_time_code" string="Working Time Code" />
+                                <field name="position_code" string="Position Code" />
+                                <field name="division_code" string="Division Code" />
+                                <field name="department_code" string="Department Code" />
+                                <field name="grade_code" string="Grade Code" />
+                                <field name="cost_center" string="Cost Center" />
+                                <field name="deputation" string="Deputation" />
+                            </group>
+                            <group name="payment_info" string="Payment Info">
+                                <field name="bank_account_id" context="{'default_partner_id': address_home_id}" />
+                                <field name="payment_type" />
+                                <field name="payment_from_bank_account" />
+                                <field name="employee_account_no" />
+                                <field name="employee_bank" />
+                                <field name="employee_bank_branch" />
+                                <field name="employee_currency_code" />
+                                <field name="employee_account_name" />
+                                <field name="address_home_id"
+                                    context="{
+                                                'show_address': 1,
+                                                'default_type': 'private',
+                                                'form_view_ref': 'base.res_partner_view_form_private'}"
+                                    options='{"always_reload": True, "highlight_first_line": True}' invisible="1" />
+                            </group>
+                        </group>
+                        <group name="address_info" string="Address Info">
+                            <group name="legal_address" string="Legal Address">
+                                <field name="legal_address_address" />
+                                <field name="legal_address_regency_city" />
+                                <field name="legal_address_district" />
+                                <field name="legal_address_village" />
+                                <field name="legal_address_province" />
+                                <field name="legal_address_country" />
+                                <field name="legal_address_post_code" />
+                            </group>
+                            <group name="permanent_address" string="Permanent Address">
+                                <field name="permanent_address_is_the_same_as_legal_address" />
+                                <field name="permanent_address_address" />
+                                <field name="permanent_address_regency_city" />
+                                <field name="permanent_address_district" />
+                                <field name="permanent_address_village" />
+                                <field name="permanent_address_province" />
+                                <field name="permanent_address_country" />
+                                <field name="permanent_address_post_code" />
+                            </group>
+                            <group name="mailing_address" string="Mailing Address">
+                                <field name="mailing_address_is_the_same_as_legal_address" />
+                                <field name="mailing_address_is_the_same_as_permanent_address" />
+                                <field name="mailing_address_address" />
+                                <field name="mailing_address_regency_city" />
+                                <field name="mailing_address_district" />
+                                <field name="mailing_address_village" />
+                                <field name="mailing_address_province" />
+                                <field name="mailing_address_country" />
+                                <field name="mailing_address_post_code" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
             </field>
         </record>
 
-        <!-- Tree View -->
-        <record id="view_employee_tree" model="ir.ui.view">
-            <field name="name">hr.employee.tree</field>
-            <field name="model">hr.employee</field>
-            <field name="arch" type="xml">
-                <tree string="Employees">
-                    <field name="Full_Name"/>
-                    <field name="Gender"/>
-                    <field name="Date_of_Birth"/>
-                    <field name="Marital_Status"/>
-                    <field name="BPJS_TK_NPP"/>
-                    <field name="BPJS_Healthcare_NPP"/>
-                    <!-- Add other fields to display in the tree view -->
-                </tree>
-            </field>
-        </record>
-
-        <!-- Action for Tree View -->
-        <record id="action_employee_tree_custom" model="ir.actions.act_window">
-            <field name="name">Employees</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_employee_tree"/>
-            <field name="domain">[]</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    Click to create a new employee record
-                </p>
-            </field>
-        </record>
-
-        <!-- Menu Item for Employees -->
-        <menuitem id="menu_hr_employee_list" name="PPU Employee" action="action_employee_tree_custom"/>
     </data>
+
 </odoo>
