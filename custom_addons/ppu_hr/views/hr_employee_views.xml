@@ -15,7 +15,6 @@
                             <group string="Personal Info" name="personal_info">
                                 <field name="employee_id_number" />
                                 <field name="salutation" />
-                                <field name="name" string="Full Name" readonly="True" />
                                 <field name="place_of_birth" />
                                 <field name="birthday" />
                                 <field name="mother_maiden_name" />
