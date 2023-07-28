@@ -10,8 +10,8 @@
     "external_dependencies": {"python3.9": ["graphene"]},
     'license': 'AGPL-3',
     'data': [
-        # views
-        'views/hr_employee_views.xml',
+        'views/employee.xml',
+        # 'views/hr_employee_views.xml',
     ],
     'demo': [],
     'installable': True,

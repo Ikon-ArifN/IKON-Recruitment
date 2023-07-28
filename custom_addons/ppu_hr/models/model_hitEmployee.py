@@ -36,8 +36,8 @@ class Employee(models.Model):
     Error_Mssg = fields.Char(string='Error Message')
     Status_Request = fields.Integer(string='Status Request')
 
-    def action_automate(self, vals_list):
-            CustomEmployee.create(self, vals_list)
+    # def action_automate(self, vals_list):
+    #         CustomEmployee.create(self, vals_list)
 
 
 
@@ -49,13 +49,6 @@ class Employee(models.Model):
             response = requests.get(api_url)
             if response.status_code == 200:
                 data = response.json()
-                # filtered_data = {key: value for key, value in data.items() if key not in ['Error_Mssg', 'Status_Request']}
-                # lowercase_data = {key.lower(): value for key, value in filtered_data.items()}
-                # keys = list(lowercase_data.keys())
-                # values = list(lowercase_data.values())
-                # logger.info("data: %s", data)
-                # logger.info("vals_list: %s", vals_list.user_id)
-                print(data['Employee_ID_Number'])
                 datas = {
                     'company_id': data_dict['company_id'],
                     'employee_type': data_dict['employee_type'],
@@ -70,16 +63,9 @@ class Employee(models.Model):
                     'Last_Education': data['Last_Education'],
                     'BPJS_TK_NPP': data['BPJS_TK_NPP'],
                 }
-                # res = self.env['hr.employee'].create(datas)
                 employees = super().create(datas)
-                # logger.info("res: %s", res)
-                # logger.info("Keys: %s", keys)
-                # logger.info("Values: %s", values)
-                # for value in values:
-                #     logger.info("Data Type: %s", type(value))
             else:
                 logger.error('Error: %s', response.status_code)
-
         except requests.exceptions.RequestException as e:
             logger.error('Error: %s', e)
 

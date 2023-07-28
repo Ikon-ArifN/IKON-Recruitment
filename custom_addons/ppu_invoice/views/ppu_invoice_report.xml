@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <template id="report_ppu_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>PPU Invoice Report</h2>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Employee ID Number</th>
+                                        <th>Full Name</th>
+                                        <th>Gender</th>
+                                        <th>Date of Hire</th>
+                                        <th>Department Description</th>
+                                        <!-- Add other fields here -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><t t-esc="doc.employee_id_number"/></td>
+                                        <td><t t-esc="doc.full_name"/></td>
+                                        <td><t t-esc="doc.gender"/></td>
+                                        <td><t t-esc="doc.date_of_hire"/></td>
+                                        <td><t t-esc="doc.department_description"/></td>
+                                        <!-- Add other fields here -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -8,6 +8,9 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="arch" type="xml">
+            <!-- <header>
+                    <button name="action_automate" string="Test" type="object" class="oe_highlight"/>
+            </header> -->
 
                 <xpath expr="//page[@name='personal_information']" position="replace">
                     <page name="personal_information" string="Private Information" groups="hr.group_hr_user">

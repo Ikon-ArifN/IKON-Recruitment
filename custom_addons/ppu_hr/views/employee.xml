@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_employee_form_custom" model="ir.ui.view">
+            <field name="name">hr.employee.form.custom</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_custom_employee_tree" model="ir.ui.view">
+            <field name="name">hr.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employee">
+                    <!-- Define the fields to display in the tree view -->
+                    <!-- For example: -->
+                    <field name="Full_Name"/>
+                    <field name="Gender"/>
+                    <field name="Date_of_Birth"/>
+                    <field name="Marital_Status"/>
+                    <field name="BPJS_TK_NPP"/>
+                    <field name="BPJS_Healthcare_NPP"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Tree View -->
+        <record id="action_custom_employee_tree" model="ir.actions.act_window">
+            <field name="name">Custom Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_custom_employee_tree"/>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new custom employee record
+                </p>
+            </field>
+        </record>
+
+
+
+        <!-- Menu Item for Custom Employees -->
+        <menuitem id="menu_custom_employee_list" name="Custom Employees" action="action_custom_employee_tree"/>
+    </data>
+</odoo>

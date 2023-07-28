@@ -3,57 +3,131 @@
         <!-- Form View -->
         <record id="view_ppu_invoice_form" model="ir.ui.view">
             <field name="name">ppu.invoice.form</field>
-            <field name="model">ppu_invoice.invoice</field>
+            <field name="model">ppu.invoice</field>
             <field name="arch" type="xml">
                 <form string="PPU Invoice">
-                    <header>
-                    <button name="action_automate" string="Test" type="object" class="oe_highlight"/>
-                    </header>
-                    <sheet>
-                        <group>
-                            <field name="id_number"/>
-                            <field name="payment_type"/>
-                            <field name="price_net"/>
-                            <field name="price_gross"/>
-                            <field name="currency"/>
-                            <field name="status"/>
-                            <field name="seller_name"/>
-                            <field name="buyer_name"/>
-                            <field name="issue_date"/>
-                            <field name="payment_to"/>
-                            <field name="paid"/>
-                            <field name="tax_name_type"/>
-                        </group>
-
-                    </sheet>
+                <header>
+                <button name="action_GetJasa" string="Create Invoice" type="object" class="oe_highlight"/>
+            </header>
+                    <group>
+                    <group>
+                        <field name="employee_id_number" string="Employee ID Number"/>
+                        <field name="employee_account_no" string="Employee – Account No. (1)"/>
+                        <field name="full_name" string="Full Name"/>
+                        <field name="gender" string="Gender"/>
+                        <field name="department_code" string="Department – Code"/>
+                        <field name="department_description" string="Department – Description"/>
+                        <field name="position_code" string="Position – Code"/>
+                        <field name="position_description" string="Position – Description"/>
+                        <field name="date_of_hire" string="Date of hire" />
+                    </group>
+                    <group>
+                        <field name="basic_salary" string="BASIC SALARY"/>
+                        <field name="uang_makan" string="UANG MAKAN"/>
+                        <field name="tunjangan_transport" string="TUNJANGAN TRANSPORT"/>
+                        <field name="tunjangan_1" string="TUNJANGAN 1"/>
+                        <field name="tunjangan_2" string="TUNJANGAN 2"/>
+                        <field name="insentif_1" string="INSENTIF 1"/>
+                        <field name="insentif_2" string="INSENTIF 2"/>
+                        <field name="outpatient" string="OUTPATIENT"/>
+                        <field name="lembur" string="LEMBUR"/>
+                        <field name="lembur_02" string="LEMBUR_02"/>
+                        <field name="uang_saku" string="UANG SAKU"/>
+                    </group>
+                    <group>
+                        <field name="koordinator" string="KOORDINATOR"/>
+                        <field name="terminasi" string="TERMINASI"/>
+                        <field name="kompensasi" string="KOMPENSASI"/>
+                        <field name="penghasilan_lain" string="PENGHASILAN LAIN"/>
+                        <field name="tunjangan_pajak" string="TUNJANGAN PAJAK"/>
+                        <field name="bpjs_kesehatan_perusahaan_allowance" string="BPJS KESEHATAN PERUSAHAAN ALLOWANCE"/>
+                        <field name="bpjs_kesehatan_perusahaan_deduction" string="BPJS KESEHATAN PERUSAHAAN DEDUCTION"/>
+                        <field name="bpjs_kesehatan_karyawan_deduction" string="BPJS KESEHATAN KARYAWAN DEDUCTION"/>
+                        <field name="bpjstk_us" string="bpjstk_us"/>
+                    </group>
+                    <group>
+                        <field name="jht_2_by_employee_deduction" string="JHT 2% BY EMPLOYEE DEDUCTION"/>
+                        <field name="jaminan_pensiun_2_perusahaan_deduction" string="JAMINAN PENSIUN 2% PERUSAHAAN DEDUCTION"/>
+                        <field name="jaminan_pensiun_1_karyawan_deduction" string="JAMINAN PENSIUN 1% KARYAWAN DEDUCTION"/>
+                        <field name="dplk_us" string="DPLK_US"/>
+                        <field name="dplk_peg" string="DPLK_PEG"/>
+                        <field name="opct" string="OPCT"/>
+                        <field name="bonus" string="BONUS"/>
+                        <field name="thr" string="THR"/>
+                        <field name="thr_realisasi" string="THR Realisasi"/>
+                        <field name="pesangon" string="PESANGON"/>
+                    </group>
+                    <group>
+                        <field name="pkwt" string="PKWT"/>
+                        <field name="opsl_01" string="OPSL_01"/>
+                        <field name="supervisi_01" string="SPRVISI_01"/>
+                        <field name="seragam_01" string="SERAGAM_01"/>
+                        <field name="diklat_01" string="DIKLAT_01"/>
+                        <field name="rekrut_01" string="REKRUT_01"/>
+                        <field name="ganti_01" string="GANTI_01"/>
+                        <field name="lain_01" string="LAIN_01"/>
+                        <field name="gross_salary" string="Gross Salary"/>
+                        <field name="opsl_02" string="OPSL_02"/>
+                        <field name="supervisi_02" string="SPRVISI_02"/>
+                        <field name="seragam_02" string="SERAGAM_02"/>
+                        <field name="diklat_02" string="DIKLAT_02"/>
+                        <field name="rekrut_02" string="REKRUT_02"/>
+                        <field name="ganti_02" string="GANTI_02"/>
+                        <field name="lain_02" string="LAIN_02"/>
+                        <field name="net_salary" string="Net Salary"/>
+                        <field name="opsl_03" string="OPSL_03"/>
+                        <field name="supervisi_03" string="SPRVISI_03"/>
+                        <field name="seragam_03" string="SERAGAM_03"/>
+                        <field name="diklat_03" string="DIKLAT_03"/>
+                        <field name="rekrut_03" string="REKRUT_03"/>
+                        <field name="ganti_03" string="GANTI_03"/>
+                        <field name="lain_03" string="LAIN_03"/>
+                        <field name="tax" string="Tax"/>
+                        <field name="tax_irreguler" string="Tax Irreguler"/>
+                        <field name="potongan_iuran" string="POTONGAN IURAN"/>
+                        <field name="potongan_pinjaman" string="POTONGAN PINJAMAN"/>
+                        <field name="potongan_klaim" string="POTONGAN KLAIM"/>
+                        <field name="potongan_transfer" string="POTONGAN TRANSFER"/>
+                    </group>
+                    <group>
+                        <field name="potongan_lain_lain" string="POTONGAN LAIN-LAIN"/>
+                        <field name="potongan_koperasi" string="Potongan Koperasi"/>
+                        <field name="total_deduction" string="Total Deduction"/>
+                        <field name="take_home_pay" string="Take Home Pay"/>
+                        <field name="peng_bruto" string="Peng. Bruto"/>
+                        <field name="fee" string="Fee"/>
+                        <field name="klaim" string="Klaim"/>
+                        <field name="ppn" string="Ppn"/>
+                        <field name="total" string="Total"/>
+                        <field name="pph23" string="Pph23"/>
+                        <field name="jasa" string="JASA"/>
+                    </group>
+                    </group>
                 </form>
             </field>
         </record>
+
         <!-- Tree View -->
         <record id="view_ppu_invoice_tree" model="ir.ui.view">
             <field name="name">ppu.invoice.tree</field>
-            <field name="model">ppu_invoice.invoice</field>
+            <field name="model">ppu.invoice</field>
             <field name="arch" type="xml">
-                <tree string="PPU Invoice">
-                            <field name="id_number"/>
-                            <field name="payment_type"/>
-                            <field name="price_net"/>
-                            <field name="price_gross"/>
-                            <field name="currency"/>
-                            <field name="status"/>
-                            <field name="seller_name"/>
-                            <field name="buyer_name"/>
+                <tree string="PPU Invoices">
+                    <field name="employee_id_number"/>
+                    <field name="full_name"/>
+                    <field name="gender"/>
+                    <field name="date_of_hire"/>
+                    <field name="department_description"/>
+                     <field name="jasa" string="JASA"/>
+                    <!-- Add other fields to display in the tree view -->
                 </tree>
             </field>
         </record>
 
-
-
-
-        <!-- Action -->
-        <record id="action_ppu_invoice" model="ir.actions.act_window">
-            <field name="name">PPU Invoice</field>
-            <field name="res_model">ppu_invoice.invoice</field>
+        <!-- Action for Tree View -->
+        <record id="action_ppu_invoice_tree" model="ir.actions.act_window">
+            <field name="name">PPU Invoices</field>
+            <field name="res_model">ppu.invoice</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_ppu_invoice_tree"/>
             <field name="domain">[]</field>
@@ -64,7 +138,20 @@
             </field>
         </record>
 
-        <!-- Menu Item -->
-        <menuitem id="menu_ppu_invoice" name="PPU Invoice"  action="action_ppu_invoice" sequence="10"/>
+        <record id="action_ppu_invoice_report" model="ir.actions.report">
+    <field name="name">PPU Invoice Report</field>
+    <field name="model">ppu.invoice</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ppu_invoice.report_ppu_invoice</field>
+    <field name="binding_model_id" ref="model_ppu_invoice"/>
+</record>
+
+        <!-- Menu Item for PPU Invoices -->
+
+
+
+<menuitem id="menu_ppu_invoice_list" name="PPU Invoices" action="action_ppu_invoice_tree"/>
+<menuitem id="menu_ppu_invoice_report" name="PPU Invoice Report" action="action_ppu_invoice_report" parent="menu_ppu_invoice_list"/>
+
     </data>
 </odoo>
