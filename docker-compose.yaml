@@ -1,12 +1,12 @@
 version: '3.1'
 
 services:
-  ppu-web:
-    container_name: ppu-web
+  ikon-web:
+    container_name: ikon-web
     image: odoo:16.0
     restart: unless-stopped
     depends_on:
-      - ppu-db
+      - ikon-db
     ports:
       - "8040:8040"
     volumes:
@@ -15,8 +15,8 @@ services:
       - ./custom_addons:/mnt/extra-addons
     command: sh -c "pip install openpyxl && pip install graphql-server && pip install graphene && pip install odoorpc && pip install wkhtmltopdf && exec odoo && tail -f /dev/null"
 
-  ppu-db:
-    container_name: ppu-db
+  ikon-db:
+    container_name: ikon-db
     image: postgres:15
     restart: unless-stopped
     ports:
@@ -24,12 +24,12 @@ services:
     expose:
       - 5440:5440
     environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo-ppu-db-data:/var/lib/postgresql/data/pgdata
+      - ikon-db-data:/var/lib/postgresql/data/pgdata
 
 volumes:
-  odoo-ppu-db-data:
+  ikon-db-data:
