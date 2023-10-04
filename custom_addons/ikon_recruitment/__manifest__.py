@@ -6,7 +6,8 @@
     'company': 'Ikonsultan Inovatama',
     'website': 'https://www.ikonsultan.com',
     'category': 'Tools',
-    'depends': ['base', 'ppu_hr'],
+    'images'  : [],
+    'depends': ['base'],
     "external_dependencies": {"python3.9": ["graphene"]},
     'license': 'AGPL-3',
     'data': [
