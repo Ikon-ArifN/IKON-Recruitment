@@ -7,10 +7,14 @@
     'website': 'https://www.ikonsultan.com',
     'category': 'Tools',
     'images'  : [],
-    'depends': ['base'],
+    'depends': ['base', 'website', 'website_hr_recruitment'],
     "external_dependencies": {"python3.9": ["graphene"]},
     'license': 'AGPL-3',
     'data': [
+        # views
+        'views/inherit/jobs_portal.xml',
+        'views/inherit/footer_login.xml',
+        'views/inherit/root_portal.xml',
     ],
     'demo': [],
     'installable': True,
