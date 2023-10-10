@@ -2,20 +2,22 @@ version: '3.1'
 
 services:
   ikon-web:
+    platform: linux/x86_64
     container_name: ikon-web
     image: odoo:16.0
     restart: unless-stopped
     depends_on:
       - ikon-db
     ports:
-      - "8040:8040"
+      - "8041:8041"
     volumes:
       - ./debian/odoo.conf:/etc/odoo/odoo.conf:ro
       - ./config:/etc/odoo
       - ./custom_addons:/mnt/extra-addons
-    command: sh -c "pip install openpyxl && pip install graphql-server && pip install graphene && pip install odoorpc && pip install wkhtmltopdf && exec odoo && tail -f /dev/null"
+    command: sh -c "pip3 install openpyxl && pip3 install pdfminer.six && pip3 install graphql-server && pip3 install PdfReader && pip3 install graphene && pip3 install PyPDF2 && pip3 install wkhtmltopdf && exec odoo && tail -f /dev/null"
 
   ikon-db:
+    platform: linux/x86_64
     container_name: ikon-db
     image: postgres:15
     restart: unless-stopped
@@ -24,9 +26,9 @@ services:
     expose:
       - 5440:5440
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=odoo
-      - POSTGRES_DB=odoo
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - ikon-db-data:/var/lib/postgresql/data/pgdata

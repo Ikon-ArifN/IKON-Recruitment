@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Model -->
+
+        <!-- Tampilan Form -->
+        <record id="view_pdf_screening_form" model="ir.ui.view">
+            <field name="name">pdf.screening.form</field>
+            <field name="model">pdf.screening</field>
+            <field name="arch" type="xml">
+                <form string="PDF Screening Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="description"/>
+                            <field name="pdf_file" filename="PDF File"/>
+                            <field name="extracted_text"/>
+                            <button name="extract_text" string="Extract Text" type="object" class="oe_highlight"/>
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tampilan Tree -->
+        <record id="view_pdf_screening_tree" model="ir.ui.view">
+            <field name="name">pdf.screening.tree</field>
+            <field name="model">pdf.screening</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="description"/>
+                    <field name="extracted_text"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Aksi untuk Tampilan Daftar -->
+        <record id="action_pdf_screening" model="ir.actions.act_window">
+            <field name="name">PDF Screening</field>
+            <field name="res_model">pdf.screening</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu Item untuk PDF Screening -->
+        <record id="menu_pdf_screening" model="ir.ui.menu">
+            <field name="name">PDF Screening</field>
+            <field name="sequence" eval="10"/>
+            <field name="action" ref="action_pdf_screening"/>
+        </record>
+
+        <!-- Grup Akses untuk Modul PDF Screening -->
+        <record id="group_pdf_screening_manager" model="res.groups">
+            <field name="name">PDF Screening Manager</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Akses ke Model PDF Screening -->
+        <!-- <record id="model_pdf_screening_access" model="ir.model.access">
+            <field name="name">Access PDF Screening</field>
+            <field name="model_id" ref="model_pdf_screening"/>
+            <field name="group_id" ref="group_pdf_screening_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record> -->
+
+    </data>
+</odoo>
