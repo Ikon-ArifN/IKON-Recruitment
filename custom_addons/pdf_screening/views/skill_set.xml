@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Skill Set Form View -->
+        <record id="view_skill_set_form" model="ir.ui.view">
+            <field name="name">Skill Set Form</field>
+            <field name="model">skill.set</field>
+            <field name="arch" type="xml">
+                <form string="Skill Set Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="skills" widget="many2many_tags"/>
+                            <!-- Add more fields here as needed -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Skill Set Tree View -->
+        <record id="view_skill_set_tree" model="ir.ui.view">
+            <field name="name">Skill Set Tree</field>
+            <field name="model">skill.set</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Skill Set Search Action -->
+        <record id="action_skill_set_search" model="ir.actions.act_window">
+            <field name="name">Search Skill Sets</field>
+            <field name="res_model">skill.set</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_skill_set_tree"/>
+            <field name="search_view_id" ref="view_skill_set_tree"/>
+        </record>
+
+        <!-- Skill Set Action -->
+        <record id="action_skill_set" model="ir.actions.act_window">
+            <field name="name">Skill Sets</field>
+            <field name="res_model">skill.set</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_skill_set_tree"/>
+        </record>
+
+    </data>
+</odoo>

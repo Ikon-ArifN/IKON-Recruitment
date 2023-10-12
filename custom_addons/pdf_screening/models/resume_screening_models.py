@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class PdfScreening(models.Model):
     _name = 'pdf.screening'
     _description = 'PDF Screening'

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Matching Resume Form View -->
+        <record id="view_matching_resume_form" model="ir.ui.view">
+            <field name="name">Matching Resume Form</field>
+            <field name="model">matching.resume</field>
+            <field name="arch" type="xml">
+                <form string="Matching Resume Form">
+                    <group>
+                        <field name="name"/>
+                       <field name="skill_tag_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select skill tags"/>
+                        <button name="perform_matching" string="Matching" type="object" class="oe_highlight"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Matching Resume Tree View -->
+        <record id="view_matching_resume_tree" model="ir.ui.view">
+            <field name="name">Matching Resume Tree</field>
+            <field name="model">matching.resume</field>
+            <field name="arch" type="xml">
+                <tree string="Matching Resumes">
+                    <field name="name"/>
+                    <field name="skill_tag_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select skill tags"/>
+                    <field name="result"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Matching Resume -->
+        <record id="action_matching_resume" model="ir.actions.act_window">
+            <field name="name">Matching Resumes</field>
+            <field name="res_model">matching.resume</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

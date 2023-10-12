@@ -3,14 +3,25 @@
     <data>
         <!-- Grup Akses untuk Modul PDF Screening -->
         <record id="group_pdf_screening_manager" model="res.groups">
-            <field name="name">PDF Screening Manager</field>
+            <field name="name">Resume Screening Manager</field>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
         <!-- Akses ke Model PDF Screening -->
         <record id="model_pdf_screening_access" model="ir.model.access">
-            <field name="name">Access PDF Screening</field>
+            <field name="name">Access Resume Screening</field>
             <field name="model_id" ref="model_pdf_screening"/>
+            <field name="group_id" ref="group_pdf_screening_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <!-- Access Skill Set -->
+        <record id="access_skill_set" model="ir.model.access">
+            <field name="name">Access Skill Set</field>
+            <field name="model_id" ref="model_skill_set"/>
             <field name="group_id" ref="group_pdf_screening_manager"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="1"/>

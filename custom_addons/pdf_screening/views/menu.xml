@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+     <!-- Resume Screening Menu -->
+        <record id="menu_pdf_screening" model="ir.ui.menu">
+            <field name="name">Resume Screening</field>
+            <field name="sequence" eval="10"/>
+            <field name="action" ref="action_pdf_screening"/>
+        </record>
+
+        <!-- Skill Set Menu -->
+        <record id="menu_my_skill" model="ir.ui.menu">
+            <field name="name">My Skills</field>
+            <field name="sequence" eval="30"/>
+            <field name="action" ref="action_skill_set"/>
+            <field name="parent_id" ref="menu_pdf_screening"/>
+        </record>
+        <!-- Define the action for the Matching menu here -->
+        <record id="menu_matching" model="ir.ui.menu">
+            <field name="name">Matching</field>
+            <field name="sequence" eval="40"/>
+            <field name="action" ref="action_matching_resume"/>
+            <field name="parent_id" ref="menu_pdf_screening"/>
+        </record>
+
+        
+    
+    </data>
+</odoo>
