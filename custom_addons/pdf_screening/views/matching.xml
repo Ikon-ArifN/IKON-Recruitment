@@ -8,11 +8,19 @@
             <field name="model">matching.resume</field>
             <field name="arch" type="xml">
                 <form string="Matching Resume Form">
+                <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_persons_form" type="object" class="oe_stat_button"
+                                icon="fa-users" attrs="{'invisible': [('person_ids', '=', 0)]}">
+                                <field name="person_ids" string="Macthing recomended" widget="statinfo" />
+                            </button>
+                        </div>
                     <group>
                         <field name="name"/>
                        <field name="skill_tag_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select skill tags"/>
                         <button name="perform_matching" string="Matching" type="object" class="oe_highlight"/>
                     </group>
+                    </sheet>
                 </form>
             </field>
         </record>

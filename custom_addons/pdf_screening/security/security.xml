@@ -29,5 +29,25 @@
             <field name="perm_unlink" eval="1"/>
         </record>
 
+        <record id="access_skill_tag" model="ir.model.access">
+            <field name="name">Access Skill Tag</field>
+            <field name="model_id" ref="model_skill_tag"/>
+            <field name="group_id" ref="group_pdf_screening_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_matching_resume" model="ir.model.access">
+            <field name="name">Access Matching Resume</field>
+            <field name="model_id" ref="model_matching_resume"/>
+            <field name="group_id" ref="group_pdf_screening_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
     </data>
 </odoo>

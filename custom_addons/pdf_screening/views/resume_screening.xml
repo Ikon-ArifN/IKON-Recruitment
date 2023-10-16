@@ -17,9 +17,14 @@
                             <field name="description"/>
                             <field name="pdf_file" filename="PDF File"/>                           
                             <button name="extract_text" string="Extract Text" type="object" class="oe_highlight"/>
+                        </group>
+                    </sheet>
+                    <sheet>
+                        <group>
                             <field name="extracted_text"/>
                         </group>
                     </sheet>
+
                 </form>
             </field>
         </record>
@@ -33,7 +38,8 @@
                     <field name="name"/>
                     <field name="date"/>
                     <field name="description"/>
-                    <field name="extracted_text"/>
+                    <field name="matching_name"/>
+                    <field name="scores" widget="progressbar"/>
                 </tree>
             </field>
         </record>

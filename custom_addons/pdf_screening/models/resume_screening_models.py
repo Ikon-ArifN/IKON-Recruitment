@@ -17,7 +17,10 @@ class PdfScreening(models.Model):
     pdf_file = fields.Binary(string='PDF File')
     extracted_text = fields.Text(string='Extracted Text', readonly=True)
     document_id = fields.Many2one('ir.attachment', string='PDF Document')
-
+    scores = fields.Float(string='Percentage (%)')
+    status = fields.Char(string='Status Screening')
+    matching_name = fields.Char(string= 'Matching Name')
+    
     @api.onchange('pdf_file')
     def _onchange_pdf_file(self):
         if self.pdf_file:
