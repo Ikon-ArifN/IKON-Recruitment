@@ -1,6 +1,9 @@
 from odoo import models, fields, api
-from fuzzywuzzy import fuzz
+# from fuzzywuzzy import fuzz
 import logging
+import io
+import base64
+from pdfminer.high_level import extract_text
 
 logger = logging.getLogger(__name__)
 
@@ -39,37 +42,53 @@ class MatchingResume(models.Model):
     # Method to perform the matching process
     def perform_matching(self):
         result = {}
-        pdf_screening_model = self.env['pdf.screening']
-        screening_records = pdf_screening_model.search([])
-
+        screening_records = self.env['ir.attachment'].sudo().search([
+            ('res_model', '=', 'hr.applicant'),
+            ('mimetype', '=', 'application/pdf')
+        ])
         required_skills = set(self.skill_tag_ids.mapped('name'))
 
         for screening in screening_records:
-            extracted_text = screening.extracted_text
-            candidate_name = screening.name
+            extracted_text = self.extract_text_from_attachment(screening)
+            candidate_name = None
 
-        # Initialize variables to count matching skills and store skill names
-            matching_skills = []
-            matching_skill_names = []
+            # Retrieve the candidate's name from hr.applicant based on res_id
+            if screening.res_id:
+                applicant = self.env['hr.applicant'].sudo().browse(screening.res_id)
+                candidate_name = applicant.partner_name
 
-        # Loop through required skills and check for matches in extracted_text
-            for skill in required_skills:
-                if skill.lower() in extracted_text.lower():
-                    matching_skills.append(skill)
-                    matching_skill_names.append(skill)
+            if candidate_name:
+                # Initialize variables to count matching skills and store skill names
+                matching_skills = []
+                matching_skill_names = []
 
-            if matching_skills:
-            # Calculate the total score as a percentage
-                total_score = (len(matching_skills) / len(required_skills)) * 100
+                # Loop through required skills and check for matches in extracted_text
+                for skill in required_skills:
+                    if skill.lower() in extracted_text.lower():
+                        matching_skills.append(skill)
+                        matching_skill_names.append(skill)
 
-            # Ensure the total score does not exceed 100%
-                total_score = min(total_score, 100)
+                if matching_skills:
+                    # Calculate the total score as a percentage
+                    total_score = (len(matching_skills) / len(required_skills)) * 100
 
-                result[candidate_name] = {"skills": matching_skill_names, "score": total_score}
+                    # Ensure the total score does not exceed 100%
+                    total_score = min(total_score, 100)
 
-                pdf_screening_record = pdf_screening_model.search([('name', '=', candidate_name)], limit=1)
-                if pdf_screening_record:
-                    pdf_screening_record.write({'scores': total_score, 'status': 'sudah dimatching', 'matching_name': self.name})
+                    result[candidate_name] = {"skills": matching_skill_names, "score": total_score}
 
-    # Update the result in the matching.resume record
+                    # Update the pdf.screening record with the matching information
+                    pdf_screening_model = self.env['pdf.screening']
+                    pdf_screening_record = pdf_screening_model.search([('name', '=', candidate_name)], limit=1)
+                    if pdf_screening_record:
+                        pdf_screening_record.write({'scores': total_score, 'status': 'sudah dimatching', 'matching_name': self.name})
+
+        # Update the result in the matching.resume record
+        
         self.write({'result': result})
+
+    def extract_text_from_attachment(self, attachment):
+        pdf_data = base64.b64decode(attachment.datas)
+        with io.BytesIO(pdf_data) as pdf_file:
+            text = extract_text(pdf_file)
+        return text
