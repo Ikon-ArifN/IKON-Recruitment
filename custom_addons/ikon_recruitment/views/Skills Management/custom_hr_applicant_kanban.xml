@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tampilan Kanban untuk hr.job -->
+        <record id="view_hr_job_kanban_inherit" model="ir.ui.view">
+            <field name="name">hr.job.kanban.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='kanban_boxes']" position="before">
+                    <div class="col-6">
+                        <button name="perform_matching" string="Run Matching" type="object" class="btn-primary"/>
+                        <div>
+                            Total Matching: <field name="matching_count"/> 
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
